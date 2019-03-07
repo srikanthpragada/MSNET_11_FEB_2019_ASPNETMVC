@@ -1,0 +1,26 @@
+﻿@model aspnetmvc.Models.Trainer
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Trainer</title>
+</head>
+<body>
+    <h2>Trainer's Name  : @Model.Name </h2>
+    <h2>Trainer's Email : @Model.Email </h2>
+
+    <h2>Skills</h2>
+    <ul>
+        @foreach (var s in Model.Skills)
+        {
+            <li>@s</li>
+        }
+    </ul>
+</body>
+</html>
