@@ -1,0 +1,44 @@
+﻿@model aspnetmvc.Models.Discount
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Discount Calculation</title>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+</head>
+<body>
+    <h2>Discount Calculation</h2>
+    @using (Html.BeginForm("Index", "Discount", FormMethod.Post))
+    {
+        <div>Amount</div>
+        <div>
+            @Html.TextBox("Amount", @Model.Amount)
+            @Html.ValidationMessage("Amount")
+        </div>
+        <p />
+        <div>Discount Rate</div>
+        <div>
+            @Html.TextBox("Rate", @Model.Rate)
+            @Html.ValidationMessage("Rate")
+        </div>
+        <p />
+        <input type="submit" value="Calcualte" />
+        <p />
+    }
+
+    @if (Model.Result > 0)
+    {
+        <h3>Discount = @Model.Result</h3>
+    }
+
+
+</body>
+</html>
