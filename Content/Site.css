@@ -1,12 +1,25 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    padding-top: 5px;
+    font-family : Verdana;
+    font-size: 12pt;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+.banner {
+    padding-top: 5px;
+    padding-bottom:5px;
+    font-family : Arial;
+    font-size:24pt;
+    font-weight : bold;
+    letter-spacing : 5pt;
+    background-color : navy;
+    color:silver;
+}
+
+.menu {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-weight: bold;
+    background-color: silver;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
