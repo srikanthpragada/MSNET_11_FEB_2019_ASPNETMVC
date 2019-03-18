@@ -1,0 +1,39 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+</head>
+<body>
+    <h3>Ajax - ActionLink</h3>
+    @Ajax.ActionLink("Get Date and Time", "DateAndTime",
+        "Ajax", new AjaxOptions { UpdateTargetId = "datetime" })
+    <h2 id="datetime"></h2>
+
+    <hr />
+    <h3>Ajax - Form</h3>
+    @using (Ajax.BeginForm("Search",
+        new AjaxOptions { UpdateTargetId = "products", HttpMethod = "post" }))
+    {
+        <span>Price from : </span>
+        <input type="number" name="minprice" required="required" />
+        <span>To : </span>
+        <input type="number" name="maxprice"  required="required"/>
+        <p/>
+        <input type="submit" value="Search"/>
+   }
+   <p></p>
+   <div id="products">
+
+   </div>
+</body>
+</html>
