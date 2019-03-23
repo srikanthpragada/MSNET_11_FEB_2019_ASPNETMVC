@@ -1,0 +1,12 @@
+﻿create table Books
+(Id int identity primary key,
+ Title  varchar(50) not null,
+ Author varchar(50),
+ Price  int
+);
+
+
+insert into books(title,author,price) values('ASP.NET MVC','Stephen Walther',600)
+insert into books(title,author,price) values('C# Comp. Ref.','Herbert Schild',550)
+insert into books(title,author,price) values('jQuery','Jhon Resig',400)
+insert into books(title,author,price) values('Angular','James',450)

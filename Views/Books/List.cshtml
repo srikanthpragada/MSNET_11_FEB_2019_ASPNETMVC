@@ -1,0 +1,41 @@
+﻿@model IEnumerable<aspnetmvc.Models.Book>
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/Books_Layout.cshtml";
+}
+
+<h2>List Of Books</h2>
+<table width="100%" cellpadding="5pt">
+    <tr style="background-color:navy;color:white">
+        <th>
+            Title
+        </th>
+        <th>
+            Author(s)
+        </th>
+        <th>
+           Price
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Author)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

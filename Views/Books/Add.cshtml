@@ -1,0 +1,30 @@
+﻿@model aspnetmvc.Models.Book
+
+@{
+    ViewBag.Title = "Add Book";
+    Layout = "~/Views/Shared/Books_Layout.cshtml";
+}
+
+<h2>Add Book</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div>Title</div>
+    @Html.TextBoxFor(model => model.Title, new { size = 50 })
+    @Html.ValidationMessageFor(model => model.Title, "")
+    <p></p>
+    <div>Author(s)</div>
+    @Html.TextBoxFor(model => model.Author, new { size = 50 } )
+    @Html.ValidationMessageFor(model => model.Author, "")
+
+    <p></p>
+    <div>Price</div>
+    @Html.EditorFor(model => model.Price)
+    @Html.ValidationMessageFor(model => model.Price, "")
+    <p></p>
+    <input type="submit" value="Add Book" />
+
+    <h4>@ViewBag.Message</h4>
+}
+
