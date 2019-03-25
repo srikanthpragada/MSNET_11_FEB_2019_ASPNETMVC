@@ -1,0 +1,37 @@
+﻿@model aspnetmvc.Models.Book
+
+@{
+    ViewBag.Title = "Add Book";
+    Layout = "~/Views/Shared/Books_Layout.cshtml";
+}
+
+<h2>Edit Book</h2>
+@if (Model != null)
+{
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div>Title</div>
+        @Html.TextBoxFor(model => model.Title, new { size = 50 })
+        @Html.ValidationMessageFor(model => model.Title, "")
+        <p></p>
+        <div>Author(s)</div>
+        @Html.TextBoxFor(model => model.Author, new { size = 50 })
+        @Html.ValidationMessageFor(model => model.Author, "")
+
+        <p></p>
+        <div>Price</div>
+        @Html.EditorFor(model => model.Price)
+        @Html.ValidationMessageFor(model => model.Price, "")
+        <p></p>
+        <input type="submit" value="Update Book" />
+    }
+}
+
+<h3> @ViewBag.Message </h3>
+
+@section scripts
+    {
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    }

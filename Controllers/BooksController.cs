@@ -52,5 +52,77 @@ namespace aspnetmvc.Controllers
             }
             return View(book);
         }
+
+        public ActionResult Delete(int id)
+        {
+            // delete book with the given id 
+            BooksContext ctx = new BooksContext();
+            var book = ctx.Books.Find(id);
+            if (book != null)
+            {
+                try
+                {
+                    ctx.Books.Remove(book);
+                    ctx.SaveChanges();
+                    return RedirectToAction("List");
+                }
+                catch(Exception ex)
+                {
+                    ViewBag.Message = "Sorry! Could not delete book due to error!";
+                }
+            }
+            else
+            {
+                ViewBag.Message = "Sorry! Book was not found!";
+            }
+           
+
+            return View();  // show view with error message 
+
+        }
+
+        // Display details of book
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            // Look for book with the given id
+            BooksContext ctx = new BooksContext();
+            var book = ctx.Books.Find(id);
+            if (book == null)
+            {
+                ViewBag.Message = "Sorry! Book was not found!";
+            }
+            return View(book);  // show view with error message 
+        }
+
+        [HttpPost]
+        public ActionResult Edit(int id, Book book)
+        {
+            // Look for book with the given id
+            BooksContext ctx = new BooksContext();
+            var dbbook = ctx.Books.Find(id);
+            if (dbbook == null)
+            {
+                ViewBag.Message = "Sorry! Book was not found!";
+            }
+            else
+            {
+                dbbook.Title = book.Title;
+                dbbook.Author = book.Author;
+                dbbook.Price = book.Price;
+                try
+                {
+                    ctx.SaveChanges();
+                    ViewBag.Message = "Update Book Successfully!";
+                }
+                catch(Exception ex)
+                {
+                    ViewBag.Message = "Sorry! Could not update book due to error! Try again!";
+                }
+            }
+
+            return View(book);  // show view with error message 
+        }
+
     }
 }

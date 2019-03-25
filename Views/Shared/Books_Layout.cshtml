@@ -7,20 +7,20 @@
     @Styles.Render("~/Content/css")
 </head>
 <body>
-   <div class="banner">Books</div>
-   <div class="menu">
-       [@Html.ActionLink("Home", "Home", "Books")]
-       &nbsp;
-       [@Html.ActionLink("Add Book", "Add", "Books")]
-       &nbsp;
-       [@Html.ActionLink("List Books", "List", "Books")]
-       &nbsp;
-       [@Html.ActionLink("Serach Books", "Search", "Books")]
-   </div>
+    <div class="banner">Books</div>
+    <div class="menu">
+        [@Html.ActionLink("Home", "Home", "Books")]
+        &nbsp;
+        [@Html.ActionLink("Add Book", "Add", "Books")]
+        &nbsp;
+        [@Html.ActionLink("List Books", "List", "Books")]
+        &nbsp;
+        [@Html.ActionLink("Search Books", "Search", "Books")]
+    </div>
 
-   @RenderBody()
+    @RenderBody()
 
-   @Scripts.Render("~/bundles/jquery")
-   @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
 </body>
 </html>

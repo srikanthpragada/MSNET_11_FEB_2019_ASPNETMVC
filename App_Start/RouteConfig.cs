@@ -16,7 +16,7 @@ namespace aspnetmvc
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Hello", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Books", action = "Home", id = UrlParameter.Optional }
             );
         }
     }
