@@ -22,10 +22,11 @@ namespace aspnetmvc.Controllers
         {
             // Get count of books
             BooksContext ctx = new BooksContext();
-            return View(ctx.Books.OrderBy(b => b.Price).ToList<Book>());
+            return View(ctx.Books.OrderByDescending(b => b.Id).Take(5).ToList<Book>());
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Add()
         {
             Book b = new Book();
@@ -33,6 +34,7 @@ namespace aspnetmvc.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Add(Book book)
         {
             if (ModelState.IsValid)
@@ -124,5 +126,20 @@ namespace aspnetmvc.Controllers
             return View(book);  // show view with error message 
         }
 
+        public ActionResult Search()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Search(string title)
+        {
+            BooksContext ctx = new BooksContext();
+            var books = from b in ctx.Books
+                        where b.Title.Contains(title)
+                        select b;
+
+            return PartialView("SearchResults", books);
+        }
     }
 }

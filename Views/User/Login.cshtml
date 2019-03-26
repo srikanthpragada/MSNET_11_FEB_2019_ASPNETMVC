@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/Books_Layout.cshtml";
+}
+
+<h2>Login</h2>
+<form action="/User/Login" method="post">
+Password : <input type="password" name="pwd"/>
+<p></p>
+<input type="submit"  value="Login" />
+</form>
+<p></p>
+@ViewBag.Message
+

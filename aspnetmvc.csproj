@@ -213,6 +213,9 @@
     <Content Include="Views\Books\Add.cshtml" />
     <Content Include="Views\Books\Delete.cshtml" />
     <Content Include="Views\Books\Edit.cshtml" />
+    <Content Include="Views\Books\Search.cshtml" />
+    <Content Include="Views\Books\SearchResults.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
