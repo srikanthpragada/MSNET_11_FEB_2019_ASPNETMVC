@@ -18,10 +18,24 @@ namespace aspnetmvc.Controllers
             return View();
         }
 
+
+        [OutputCache(Duration=180)]
         public ActionResult List()
         {
+            /*
+            var books = HttpContext.Cache["books"];
+            if (books == null)
+            {
+                // get data into books 
+                HttpContext.Cache.Insert("books", books, null,
+                                          DateTime.Now.AddSeconds(120),TimeSpan.Zero);
+            }
+            // use books 
+            */
+
             // Get count of books
             BooksContext ctx = new BooksContext();
+            ViewBag.Timestamp = DateTime.Now.ToLongTimeString(); 
             return View(ctx.Books.OrderByDescending(b => b.Id).Take(5).ToList<Book>());
         }
 

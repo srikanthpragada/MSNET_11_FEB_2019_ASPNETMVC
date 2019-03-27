@@ -25,18 +25,22 @@ namespace aspnetmvc.Controllers
             return View(user);
         }
 
-        public ActionResult Login()
+        public ActionResult Login(string ReturnUrl)
         {
+            ViewBag.ReturnUrl = ReturnUrl;
             return View();
         }
         [HttpPost]
         public ActionResult Login(string pwd, string ReturnUrl)
         {
+            HttpContext.Trace.Write("Pwd : " + pwd);
+            HttpContext.Trace.Write("ReturnUrl : " + ReturnUrl);
+
             if (pwd == "123")
             {
                 // create cookie to authenticate user 
                 FormsAuthentication.SetAuthCookie("user", true);
-                return RedirectToAction("Add", "Books");
+                return Redirect(ReturnUrl);
             }
             else
             {
@@ -44,5 +48,13 @@ namespace aspnetmvc.Controllers
             }
             return View();
         }
+
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon();
+            return Redirect("/");  // Go to home page
+        }
+        
     }
 }
