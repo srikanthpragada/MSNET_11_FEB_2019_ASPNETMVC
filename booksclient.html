@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Books Client</title>
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        URL = "/api/ApiBooks";
+        function getBooks() {
+            $.getJSON(URL, null, showBooks);
+        }
+
+        function showBooks(books) {
+            s = "<ul>";
+            for (i = 0; i < books.length; i++) {
+                title = books[i].Title;
+                price = books[i].Price;
+                id = books[i].Id;
+                s += "<li>" + id + " - " + title + " - " + price + "</li>";
+            }
+            s += "</ul>";
+            $("#books").html(s);
+        }
+
+        function addBook() {
+            $("#msg").text("Please wait...")
+
+            data = {
+                "Title": $("#title").val(),
+                "Author": $("#author").val(),
+                "Price": $("#price").val()
+            };
+
+            $.ajax(
+                {
+                    "url": URL,
+                    "data": data,
+                    "type": "post",
+                    "success":
+                    function () {
+                        alert("Book has been added successfully!");
+                    }
+                    ,
+                    "error":
+                    function () {
+                        alert("Sorry! Book was not added due to error!");
+                    },
+                    "complete":
+                    function () {
+                        $("#msg").text("")
+                    }
+
+                }
+            );
+
+
+        }
+
+        function deleteBook() {
+            $("#delMsg").text("Please wait...")
+            $.ajax(
+                {
+                    "url": URL + "/" + $("#id").val(),
+                    "type": "delete",
+                    "success":
+                    function () {
+                        alert("Book has been deleted successfully!");
+                    }
+                    ,
+                    "error":
+                    function () {
+                        alert("Sorry! Book was not found!");
+                    },
+                    "complete":
+                    function () {
+                        $("#delMsg").text("")
+                    }
+
+                }
+            );
+        }
+
+    </script>
+</head>
+<body>
+    <h1>Books Client</h1>
+    <button onclick="getBooks()">Get Books</button>
+    <div id="books">
+    </div>
+    <h3>Add Book</h3>
+    Title : <input type="text" id="title" />
+    Author : <input type="text" id="author" />
+    Price : <input type="number" id="price" />
+    <span id="msg"></span>
+    <p></p>
+    <button onclick="addBook()">Add Book</button>
+    <h3>Delete Book</h3>
+    Id : <input type="number" id="id" />
+    <span id="delMsg"></span>
+    <p></p>
+    <button onclick="deleteBook()">Delete Book</button>
+
+
+
+</body>
+</html>
