@@ -30,43 +30,26 @@ namespace aspnetmvc.Controllers
             Book book = db.Books.Find(id);
             if (book == null)
             {
-                return NotFound();
+                return NotFound();  // 404
             }
 
-            return Ok(book);
+            return Ok(book);  // 200 
         }
 
         // PUT: api/ApiBooks/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutBook(int id, Book book)
         {
+            book.Id = id;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            if (id != book.Id)
-            {
-                return BadRequest();
-            }
-
+            // Change status of book object to modified so that 
+            // UPDATE command is created for book object 
+            
             db.Entry(book).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!BookExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            db.SaveChanges();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
@@ -110,9 +93,5 @@ namespace aspnetmvc.Controllers
             base.Dispose(disposing);
         }
 
-        private bool BookExists(int id)
-        {
-            return db.Books.Count(e => e.Id == id) > 0;
-        }
     }
 }

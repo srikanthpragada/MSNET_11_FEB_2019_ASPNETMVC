@@ -9,7 +9,6 @@
         function getBooks() {
             $.getJSON(URL, null, showBooks);
         }
-
         function showBooks(books) {
             s = "<ul>";
             for (i = 0; i < books.length; i++) {
@@ -20,6 +19,26 @@
             }
             s += "</ul>";
             $("#books").html(s);
+        }
+
+        function getBook() {
+            $.ajax(
+                {
+                    "url": URL + "/" + $("#u_id").val(),
+                    "type": "get",
+                    "success":
+                      function (book) {
+                        $("#u_title").val(book.Title);
+                        $("#u_author").val(book.Author);
+                        $("#u_price").val(book.Price);
+                      }
+                    ,
+                    "error":
+                       function () {
+                        $("#bookMsg").text("Sorry! Book not found!");
+                       }
+                }
+            );
         }
 
         function addBook() {
@@ -52,8 +71,6 @@
 
                 }
             );
-
-
         }
 
         function deleteBook() {
@@ -75,11 +92,40 @@
                     function () {
                         $("#delMsg").text("")
                     }
-
                 }
             );
         }
 
+        function updateBook() {
+            $("#bookMsg").text("Please wait...")
+            data = {
+                "Title": $("#u_title").val(),
+                "Author": $("#u_author").val(),
+                "Price": $("#u_price").val()
+            };
+
+            $.ajax(
+                {
+                    "url": URL + "/" + $("#u_id").val(),
+                    "data": data,
+                    "type": "put",
+                    "success":
+                    function () {
+                        alert("Book has been updated successfully!");
+                    }
+                    ,
+                    "error":
+                    function () {
+                        alert("Sorry! Book was not updated due to error!");
+                    },
+                    "complete":
+                    function () {
+                        $("#bookMsg").text("")
+                    }
+
+                }
+            )
+        }
     </script>
 </head>
 <body>
@@ -99,6 +145,18 @@
     <span id="delMsg"></span>
     <p></p>
     <button onclick="deleteBook()">Delete Book</button>
+    <h3>Update Book</h3>
+    Id : <input type="number" id="u_id" />
+      <button onclick="getBook()">Get Details</button>
+    <p></p>
+    Title : <input type="text" id="u_title" />
+    Author : <input type="text" id="u_author" />
+    Price : <input type="number" id="u_price" />
+    <p></p>
+    <button onclick="updateBook()">Update Book</button>
+    <p></p>
+    <span id="bookMsg"></span>
+
 
 
 
